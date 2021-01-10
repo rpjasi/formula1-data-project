@@ -1,16 +1,14 @@
 import pandas as pd
-import csv
 import numpy as np 
-import matplotlib.pyplot as plt 
 
-
+#Set up variables for data scraping from url
 url_template = 'https://www.statsf1.com/en/{year}.aspx'
 results = {}
 years = [i for i in range(2019,1990,-1)]
 for yr in years:
+    #cleaning and reorganising data 
     df = pd.read_html(url_template.format(year=yr))
     raw_data = df[0]
-
     raw_data = raw_data.drop([0])
     raw_data = raw_data.drop([0], axis=1)
     raw_data.insert(0, 'Year', yr)
